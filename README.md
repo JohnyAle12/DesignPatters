@@ -9,3 +9,9 @@ Here to run some script only you need execute in the terminal
 # execute some php script
 $ php index.php
 ```
+
+After update composer to you can run application
+```bash
+# execute composer command
+$ composer dumpautoload
+```
