@@ -1,12 +1,12 @@
 <?php
 
+require 'vendor/autoload.php';
+
 use App\Commands\CloseDocumentCommand;
 use App\Commands\OpenDocumentCommand;
 use App\Commands\SaveDocumentCommand;
 use App\Document;
 use App\Menu;
-
-require 'vendor/autoload.php';
 
 //receiver
 $document = new Document();
