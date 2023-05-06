@@ -14,9 +14,19 @@ class Subscriber implements Observer
         private readonly string $name
     ){}
 
-    public function update(): void
+    public function created(): void
     {
-        var_dump("Notify to {$this->getName()}: New video posted on the channel", $this->observable->getDataToNotify());
+        var_dump("Notify to {$this->getName()}: Something was created", $this->observable->getDataToNotify());
+    }
+
+    public function updated(): void
+    {
+        var_dump("Notify to {$this->getName()}: Something was updated", $this->observable->getDataToNotify());
+    }
+
+    public function deleted(): void
+    {
+        var_dump("Notify to {$this->getName()}: Something was deleted", $this->observable->getDataToNotify());
     }
 
     public function getName(): string

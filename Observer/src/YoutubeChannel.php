@@ -6,6 +6,7 @@ namespace App;
 
 use App\Interface\Observable;
 use App\Interface\Observer;
+use Error;
 
 class YoutubeChannel implements Observable
 {
@@ -19,13 +20,13 @@ class YoutubeChannel implements Observable
 
     public function detach(Observer $observer): void
     {
-        
+        // TODO: remove a suscriber from the list
     }
 
     public function addNewVideo(string $title): void
     {
         $this->lastVideoPosted = $title;
-        $this->notify();
+        $this->notify('created');
     }
 
     public function getDataToNotify(): array
@@ -35,10 +36,22 @@ class YoutubeChannel implements Observable
         ];
     }
 
-    public function notify(): void
+    public function notify(string $eventType): void
     {
-        foreach ($this->channelSubscribers as $subscriber) {
-            $subscriber->update();
+        switch ($eventType) {
+            case 'created':
+                foreach ($this->channelSubscribers as $subscriber) {
+                    $subscriber->created();
+                }
+            break;
+            case 'updated':
+                foreach ($this->channelSubscribers as $subscriber) {
+                    $subscriber->updated();
+                }
+            break;
+            default:
+                throw new Error("The event type {$eventType} isn't supported");
+            break;
         }
     }
 }
